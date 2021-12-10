@@ -13,27 +13,22 @@ class DefaultController extends AbstractController
 	 */
 	public function listeArticles(): Response
 	{
-		$url1 = $this->generateUrl("vue_article", ["id" => 1]);
-		$url2 = $this->generateUrl("vue_article", ["id" => 2]);
-		$url3 = $this->generateUrl("vue_article", ["id" => 3]);
-		$url4 = $this->generateUrl("vue_article", ["id" => 4]);
-
 		$articles = [
 			[
-				"nom" => "Article 1",
-				"url" => $url1
+				"id" => 1,
+				"nom" => "Article 1"
 			],
 			[
-				"nom" => "Article 2",
-				"url" => $url2
+				"id" => 2,
+				"nom" => "Article 2"
 			],
 			[
-				"nom" => "Article 3",
-				"url" => $url3
+				"id" => 3,
+				"nom" => "Article 3"
 			],
 			[
-				"nom" => "Article 4",
-				"url" => $url4
+				"id" => 4,
+				"nom" => "Article 4"
 			]
 		];
 		

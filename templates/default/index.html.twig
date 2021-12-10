@@ -7,11 +7,11 @@
 
 	<h1>Liste des articles</h1>
 
-	
+	<p>{{ articles|taille }}</p>
 	
 	<ul>
 	{% for article in articles %}
-		<li><a href="{{ article['url'] }}">{{ article['nom'] }}</a></li>
+		<li><a href="{{ path("vue_article", {'id': article['id']}) }}">{{ article['nom'] }}</a></li>
 	{% endfor %}
 	</ul>
 	
