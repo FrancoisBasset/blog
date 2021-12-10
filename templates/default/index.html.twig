@@ -3,10 +3,16 @@
 {% block title %}Liste des articles{% endblock %}
 
 {% block body %}
+	{% include "menu/_menu.html.twig" %}
+
 	<h1>Liste des articles</h1>
+
+	
+	
 	<ul>
-		<li><a href="{{ url1 }}">Article 1</a></li>
-		<li><a href="{{ url2 }}">Article 2</a></li>
-		<li><a href="{{ url3 }}">Article 3</a></li>
+	{% for article in articles %}
+		<li><a href="{{ article['url'] }}">{{ article['nom'] }}</a></li>
+	{% endfor %}
 	</ul>
+	
 {% endblock %}

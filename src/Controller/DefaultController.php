@@ -16,11 +16,29 @@ class DefaultController extends AbstractController
 		$url1 = $this->generateUrl("vue_article", ["id" => 1]);
 		$url2 = $this->generateUrl("vue_article", ["id" => 2]);
 		$url3 = $this->generateUrl("vue_article", ["id" => 3]);
+		$url4 = $this->generateUrl("vue_article", ["id" => 4]);
+
+		$articles = [
+			[
+				"nom" => "Article 1",
+				"url" => $url1
+			],
+			[
+				"nom" => "Article 2",
+				"url" => $url2
+			],
+			[
+				"nom" => "Article 3",
+				"url" => $url3
+			],
+			[
+				"nom" => "Article 4",
+				"url" => $url4
+			]
+		];
 		
 		return $this->render("default/index.html.twig", [
-			"url1" => $url1,
-			"url2" => $url2,
-			"url3" => $url3
+			"articles" => $articles
 		]);
 	}
 
