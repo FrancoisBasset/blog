@@ -12,10 +12,10 @@ class CommentFixtures extends Fixture
     {
 		for ($i = 1; $i <= 10; $i++) {
 			$comment = new Comment();
-			$comment->setContenu("Ceci est le contenu du commentaire");
-			$comment->setAuthor("Francois");
+			$comment->setContenu('Ceci est le contenu du commentaire');
+			$comment->setAuthor('Francois');
 			$comment->setDateComment(new \DateTime());
-			$comment->setArticle($this->getReference("article-1"));
+			$comment->setArticle($this->getReference('article-1'));
 
 			$manager->persist($comment);
 		}

@@ -15,32 +15,32 @@ class Article
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type='integer')
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type='string', length=255)
      */
     private $titre;
 
     /**
-     * @ORM\Column(type="text")
+     * @ORM\Column(type='text')
      */
     private $contenu;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type='date')
      */
     private $dateCreation;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="article", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy='article', orphanRemoval=true)
      */
     private $comments;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy="articles")
+     * @ORM\ManyToMany(targetEntity=Category::class, mappedBy='articles')
      */
     private $categories;
 

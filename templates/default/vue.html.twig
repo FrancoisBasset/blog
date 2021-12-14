@@ -1,4 +1,4 @@
-{% extends "base.html.twig" %}
+{% extends 'base.html.twig' %}
 
 {% block title %}
 	{{ article.titre }}
@@ -6,16 +6,32 @@
 
 {% block body %}
 	<h1>{{ article.titre }}</h1>
-	<small>{{ article.dateCreation|date("d/m/Y") }}</small>
+	<small>{{ article.dateCreation|date('d/m/Y') }}</small>
 	<p>{{ article.contenu }}</p>
 	<h2>Commentaires</h2>
 
-	<div class="row">
+	<div class='row'>
 	{% for comment in article.comments %}
-		<div class="col-md-12">
-			<small>Le {{ comment.dateComment|date("d/m/Y") }} par {{ comment.author }}</small>
+		<div class='col-md-12'>
+			<small>Le {{ comment.dateComment|date('d/m/Y') }} par {{ comment.author }}</small>
 			<p>{{ comment.contenu }}</p>
 		</div>
 	{% endfor %}
 	</div>
+
+	{{ form_start(form) }}
+		{{ form_label(form.contenu, null, {'label_attr': {'class':'form-label'}}) }}
+		{{ form_widget(form.contenu, {'attr': {'class':'form-control'}}) }}
+
+		{{ form_label(form.author, null, {'label_attr': {'class':'form-label'}}) }}
+		{{ form_widget(form.author, {'attr': {'class':'form-control'}}) }}
+
+		<div class='form-check'>
+			{{ form_widget(form.condition, {'attr':{'class':'form-check-input'}}) }}
+			{{ form_label(form.condition, null, {'label_attr':{'class':'form-check-label'}}) }}
+		</div>
+
+		{{ form_rest(form) }}
+		<button type='submit' class='btn btn-success mt-2 mb-5'>Enregistrer</button>
+	{{ form_end(form) }}
 {% endblock %}

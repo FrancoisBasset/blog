@@ -15,17 +15,17 @@ class Category
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type='integer')
      */
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type='string', length=255)
      */
     private $name;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Article::class, inversedBy="categories")
+     * @ORM\ManyToMany(targetEntity=Article::class, inversedBy='categories')
      */
     private $articles;
 
@@ -74,4 +74,9 @@ class Category
 
         return $this;
     }
+
+	public function __toString()
+	{
+		return $this->name;
+	}
 }

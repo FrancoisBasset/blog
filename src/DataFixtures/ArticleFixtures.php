@@ -12,14 +12,14 @@ class ArticleFixtures extends Fixture
     {
 		for ($i = 1; $i <= 10; $i++) {
 			$article = new Article();
-			$article->setTitre("Article n°".$i);
-			$article->setContenu("Ceci est le contenu de l'article");
+			$article->setTitre('Article n°'.$i);
+			$article->setContenu('Ceci est le contenu de l\'article');
 
 			$date = new \DateTime();
-			$date->modify("-".$i." days");
+			$date->modify('-'.$i.' days');
 			$article->setDateCreation($date);
 
-			$this->addReference("article-".$i, $article);
+			$this->addReference('article-'.$i, $article);
 
 			$manager->persist($article);
 		}
