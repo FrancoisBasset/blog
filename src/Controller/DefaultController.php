@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 class DefaultController extends AbstractController
 {
     /**
-	 * @Route('/', name='liste_articles', methods={'GET'})
+	 * @Route("/", name="liste_articles", methods={"GET"})
 	 */
 	public function listeArticles(ArticleRepository $articleRepository): Response
 	{
@@ -28,7 +28,7 @@ class DefaultController extends AbstractController
 	}
 
 	/**
-	 * @Route('/{id}', name='vue_article', requirements={'id'='\d+'}, methods={'GET', 'POST'})
+	 * @Route("/{id}", name="vue_article", requirements={"id"="\d+"}, methods={"GET", "POST"})
 	 */
 	public function vueArticle(Article $article, Request $request, EntityManagerInterface $manager)
 	{
@@ -55,7 +55,7 @@ class DefaultController extends AbstractController
 	}
 
 	/**
-	 * @Route('/article/ajouter', name='ajout_article')
+	 * @Route("/article/ajouter", name="ajout_article")
 	 */
 	public function ajouter(Request $request, EntityManagerInterface $manager)
 	{

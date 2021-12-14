@@ -9,10 +9,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class CategoryController extends AbstractController
 {
-    /**
-	 * @Route('/categories', name='categories', methods={'GET'})
+	/**
+	 * @Route("/categories", name="categories")
 	 */
-    public function index(CategoryRepository $categoryRepository): Response
+    public function categories(CategoryRepository $categoryRepository): Response
     {
         return $this->render('category/index.html.twig', [
             'categories' => $categoryRepository->findAll()

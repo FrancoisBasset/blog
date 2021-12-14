@@ -13,27 +13,27 @@ class Comment
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
-     * @ORM\Column(type='integer')
+     * @ORM\Column(type="integer")
      */
     private $id;
 
     /**
-     * @ORM\Column(type='string', length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $contenu;
 
     /**
-     * @ORM\Column(type='datetime')
+     * @ORM\Column(type="datetime")
      */
     private $dateComment;
 
     /**
-     * @ORM\Column(type='string', length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $author;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy='comments')
+     * @ORM\ManyToOne(targetEntity=Article::class, inversedBy="comments")
      * @ORM\JoinColumn(nullable=false)
      */
     private $article;
