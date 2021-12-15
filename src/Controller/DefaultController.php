@@ -11,7 +11,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ArticleRepository;
+use App\Service\VerificationComment;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
+use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 
 class DefaultController extends AbstractController
 {
@@ -30,7 +34,7 @@ class DefaultController extends AbstractController
 	/**
 	 * @Route("/{id}", name="vue_article", requirements={"id"="\d+"}, methods={"GET", "POST"})
 	 */
-	public function vueArticle(Article $article, Request $request, EntityManagerInterface $manager)
+	public function vueArticle(Article $article, Request $request, EntityManagerInterface $manager, VerificationComment $verifService)
 	{
 		$comment = new Comment();
 		$comment->setArticle($article);
@@ -40,12 +44,14 @@ class DefaultController extends AbstractController
 		$form->handleRequest($request);
 
 		if ($form->isSubmitted() && $form->isValid()) {
-			$manager->persist($comment);
-			$manager->flush();
+			if ($verifService->commentaireNonAutorise($comment) === false) {
+				$manager->persist($comment);
+				$manager->flush();
 
-			$this->redirectToRoute('vue_article', [
-				'id' => $article->getId()
-			]);
+				$this->redirectToRoute('vue_article', [
+					'id' => $article->getId()
+				]);
+			}
 		}
 
 		return $this->render('default/vue.html.twig', [
@@ -56,11 +62,16 @@ class DefaultController extends AbstractController
 
 	/**
 	 * @Route("/article/ajouter", name="ajout_article")
+	 * @Route("/article/{id}/edition", name="edition_article", requirements={"id"="\d+"}, methods={"GET", "POST"})
 	 */
-	public function ajouter(Request $request, EntityManagerInterface $manager)
+	public function ajouter(Article $article = null, Request $request, EntityManagerInterface $manager, LoggerInterface $logger)
 	{
-		$article = new Article();
+		if ($article == null) {
+			$article = new Article();
+		}
 
+		$logger->info('Nous sommes passé ici');
+		
 		$form = $this->createForm(ArticleType::class, $article);
 
 		/*$form = $this->createFormBuilder()
@@ -85,7 +96,11 @@ class DefaultController extends AbstractController
 			]);
 			$article->addCategory($category);*/
 
-			$manager->persist($article);
+			if ($article->getId() === null) {
+				$manager->persist($article);
+			}
+
+			
 			$manager->flush();
 
 			return $this->redirectToRoute('liste_articles');

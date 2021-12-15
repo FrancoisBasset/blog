@@ -19,6 +19,14 @@
 	{% endfor %}
 	</div>
 
+	{% for label, messages in app.flashes(['error']) %}
+		{% for message in messages %}
+			<div class="alert alert-{{ label }}">
+				{{ message }}
+			</div>
+		{% endfor %}
+	{% endfor %}
+
 	{{ form_start(form) }}
 		{{ form_label(form.contenu, null, {'label_attr': {'class':'form-label'}}) }}
 		{{ form_widget(form.contenu, {'attr': {'class':'form-control'}}) }}
