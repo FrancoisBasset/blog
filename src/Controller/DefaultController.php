@@ -24,10 +24,13 @@ class DefaultController extends AbstractController
 	 */
 	public function listeArticles(ArticleRepository $articleRepository): Response
 	{
-		$articles = $articleRepository->findAll();
+		$articles = $articleRepository->findBy([
+			'state' => 'publie'
+		]);
 		
 		return $this->render('default/index.html.twig', [
-			'articles' => $articles
+			'articles' => $articles,
+			'brouillon' => false
 		]);
 	}
 
@@ -96,10 +99,15 @@ class DefaultController extends AbstractController
 			]);
 			$article->addCategory($category);*/
 
+			if ($form->get('brouillon')->isClicked()) {
+				$article->setState('brouillon');
+			} else {
+				$article->setState('a publier');
+			}
+
 			if ($article->getId() === null) {
 				$manager->persist($article);
 			}
-
 			
 			$manager->flush();
 
@@ -108,6 +116,21 @@ class DefaultController extends AbstractController
 
 		return $this->render('default/ajout.html.twig', [
 			'form' => $form->createView()
+		]);
+	}
+
+	/**
+	 * @Route("/article/brouillon", name="brouillon_article")
+	 */
+	public function brouillon(ArticleRepository $articleRepository)
+	{
+		$articles = $articleRepository->findBy([
+			'state' => 'brouillon'
+		]);
+
+		return $this->render('default/index.html.twig', [
+			'articles' => $articles,
+			'brouillon' => true
 		]);
 	}
 }

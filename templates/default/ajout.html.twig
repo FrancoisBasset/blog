@@ -4,11 +4,12 @@
 
 {% block body %}
 
-	{{ form_start(form) }}
-		{{ form_errors(form) }}
-
+	{{ form_start(form, {'attr':{'class':'was-validated'}}) }}
 		{{ form_label(form.titre, null, {'label_attr': {'class': 'form-label'}}) }}
 		{{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
+		<div class="invalid-feedback">
+			{{ form_errors(form.titre) }}
+		</div>
 
 		{{ form_label(form.contenu, null, {'label_attr': {'class': 'form-label'}}) }}
 		{{ form_widget(form.contenu, {'attr': {'class': 'form-control'}}) }}
@@ -19,7 +20,10 @@
 		{{ form_label(form.categories, null, {'label_attr': {'class': 'form-label'}}) }}
 		{{ form_widget(form.categories, {'attr': {'class': 'form-control'}}) }}
 
-		<button type='submit' class='btn btn-success'>Enregistrer</button>
+		{{ form_widget(form.brouillon, {'attr':{'class':'btn btn-default'}}) }}
+		{{ form_widget(form.publier, {'attr':{'class':'btn btn-success'}}) }}
+
+		{{ form_rest(form) }}
 	{{ form_end(form) }}
 
 	

@@ -6,6 +6,9 @@
 
 {% block body %}
 	<h1>{{ article.titre }}</h1>
+	<p>
+		<a href="{{ path('edition_article', {'id':article.id}) }}" class="btn btn-info">Editer</a>
+	</p>
 	<small>{{ article.dateCreation|date('d/m/Y') }}</small>
 	<p>{{ article.contenu }}</p>
 	<h2>Commentaires</h2>

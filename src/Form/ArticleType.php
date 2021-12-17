@@ -6,6 +6,7 @@ use App\Entity\Article;
 use App\Entity\Category;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -25,6 +26,12 @@ class ArticleType extends AbstractType
 				'class' => Category::class,
 				'multiple' => true,
 				'by_reference' => false
+			])
+			->add('brouillon', SubmitType::class, [
+				'label' => 'Enregistrer un brouillon'
+			])
+			->add('publier', SubmitType::class, [
+				'label' => 'A publier'
 			])
         ;
     }

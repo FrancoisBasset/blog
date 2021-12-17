@@ -5,7 +5,7 @@
 {% block body %}
 	
 
-	<h1>Liste des articles</h1>
+	<h1>Liste des articles {% if brouillon %}brouillons{% endif %}</h1>
 
 	<p>La page contient {{ articles|taille }} articles</p>
 	
