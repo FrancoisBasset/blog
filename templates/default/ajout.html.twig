@@ -3,8 +3,11 @@
 {% block title %}Ajouter un article{% endblock %}
 
 {% block body %}
-
-	{{ form_start(form, {'attr':{'class':'was-validated'}}) }}
+	{% if not form.vars.valid %}
+		{{ form_start(form, {'attr':{'class':'was-validated'}}) }}
+	{% else %}
+		{{ form_start(form) }}
+	{% endif %}
 		{{ form_label(form.titre, null, {'label_attr': {'class': 'form-label'}}) }}
 		{{ form_widget(form.titre, {'attr': {'class': 'form-control'}}) }}
 		<div class="invalid-feedback">
