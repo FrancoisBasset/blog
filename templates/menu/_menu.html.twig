@@ -20,6 +20,15 @@
 				<a class='nav-link' href='{{ path('brouillon_article') }}'>Les brouillons</a>
 			</li>
 		{% endif %}
+		{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+			<li class='nav-item'>
+				<a class='nav-link' href='{{ path('app_logout') }}'>Déconnexion</a>
+			</li>
+		{% else %}
+			<li class='nav-item'>
+				<a class='nav-link' href='{{ path('app_login') }}'>Connexion</a>
+			</li>
+		{% endif %}
       </ul>
     </div>
   </div>
